@@ -1,44 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Bakery</title>
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+<title>الباستري </title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="stars" id="stars" aria-hidden="true"></div>
 <main>
-  <h1>You Are The Bakery</h1>
-  <p class="sub">Remember the recipe. The door won't show it twice.</p>
-  <div class="hud"><span id="sc">Score 0</span><span id="rd">Round 1</span><span id="lv">Lives ♥♥♥</span></div>
+  <h1>أنتَ الباستري</h1>
+  <p class="sub">احفظ الوصفة… الباب ما رح يوريك ياها مرتين.</p>
 
+  <!-- الشاشة 1: الاسم -->
   <div class="start-wrap" id="intro">
     <section class="panel center">
-      <h2>Welcome through the little door</h2>
-      <p>Study each recipe before it vanishes, then rebuild the cake from memory. One wrong ingredient and the cake collapses. Three collapses and you're stuck here.</p>
-      <button class="btn" id="start">Start baking</button>
+      <h2>أهلاً فيك من الباب الصغير</h2>
+      <p>عندك ثواني قليلة لتحفظ كل وصفة، وبعدها ركّب الكيكة من ذاكرتك: طوابق، حشوة، كريمة، صوص، رشّات وزينة.</p>
+      <label class="field" for="name">شو اسمك؟</label>
+      <input id="name" class="input" type="text" maxlength="16" placeholder="اكتب اسمك" autocomplete="off">
+      <p class="hint hide" id="nameErr">اكتب اسمك عشان تكمّل.</p>
+      <button class="btn" id="start">كمّل</button>
     </section>
   </div>
 
-  <section class="panel hide" id="game">
-    <h2 id="phase"></h2>
-    <div class="recipe" id="recipe"></div>
-    <div class="bar" id="barWrap"><div id="bar"></div></div>
-    <div class="stage"><div class="cake" id="cake"></div></div>
-    <div id="build" class="hide">
-      <div id="rows"></div>
-      <div class="center"><button class="btn" id="bake" disabled>Bake the cake</button></div>
+  <!-- الشاشة 2: الشخصية -->
+  <div class="start-wrap hide" id="pickChar">
+    <section class="panel center wide">
+      <h2 id="charTitle">اختار شخصيتك</h2>
+      <div class="chars" id="chars" role="radiogroup" aria-label="الشخصيات"></div>
+      <button class="btn" id="choose" disabled>اختيار</button>
+    </section>
+  </div>
+
+  <!-- الشاشة 3: اللعبة -->
+  <div id="gameWrap" class="hide">
+    <div class="hud">
+      <span class="who"><img id="avatar" alt=""><b id="whoName"></b></span>
+      <span id="sc">النقاط 0</span><span id="rd">الجولة 1</span><span id="lv">الأرواح ♥♥♥</span>
     </div>
-    <div id="result" class="hide center">
-      <p class="res" id="resTxt"></p>
-      <div class="cmp" id="cmp"></div>
-      <button class="btn" id="next">Next recipe</button>
-    </div>
-  </section>
+    <section class="panel" id="game">
+      <h2 id="phase"></h2>
+      <div class="bar" id="barWrap"><div id="bar"></div></div>
+      <div class="stage" id="stage" aria-label="الكيكة ثلاثية الأبعاد، اسحب لتدويرها"></div>
+      <p class="tip" id="tip">اسحب الكيكة بإصبعك لتدوّرها</p>
+      <div class="recipe" id="recipe"></div>
+      <div id="build" class="hide">
+        <div class="say"><img id="sayImg" alt=""><p class="hint" id="feedback" aria-live="polite"></p></div>
+        <div id="rows"></div>
+      </div>
+      <div id="result" class="hide center">
+        <p class="res" id="resTxt"></p>
+        <div class="cmp" id="cmp"></div>
+        <button class="btn" id="next">جولة جديدة</button>
+      </div>
+    </section>
+  </div>
 </main>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
